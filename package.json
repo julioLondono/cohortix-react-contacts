@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "c9": "webpack-dev-server --mode development --open --host $IP --port $PORT",
+    "c9": "webpack-dev-server --mode development",
     "build": "webpack --mode development"
   },
   "author": "",
