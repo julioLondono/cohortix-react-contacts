@@ -37,18 +37,26 @@ const getState = ({ getStore, setStore }) => {
                 var tempStore = getStore();
                 tempStore.contacts.push(item);
                 setStore({tempStore});
-			},
-			deleteItem: id => {
-				// alert("This action will remove this item");
-				const store = getStore();
+            },
+            updateContact : (contact, actualPage) => {
+                const tempStore = getStore();
+				tempStore.contacts.map((item, index) => {
+                    return item;
+                });
+                    tempStore[actualPage]=contact;
+                                
+                setStore({ contacts: tempStore });
 
-				const mappedArray = store.contacts.map((item, index) => {
+            },
+			deleteItem: id => {
+				alert("This action will remove this item");
+				const store = getStore();
+                const mappedArray = store.contacts.map((item, index) => {
 					return item;
 				});
 
 				mappedArray.splice(id, 1);
 
-				// console.log("mappedDemo=" + mappedDemo);
 				setStore({ contacts: mappedArray });
 			}
 		}

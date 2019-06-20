@@ -44,6 +44,7 @@ export default class Contacts extends React.Component {
 												e_mail={elem.e_mail}
 												image={elem.image}
 												key={index}
+												theId={index}
 											/>
 										);
 									});
