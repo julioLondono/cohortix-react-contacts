@@ -40,12 +40,14 @@ const getState = ({ getStore, setStore }) => {
             },
             updateContact : (contact, actualPage) => {
                 const tempStore = getStore();
-				tempStore.contacts.map((item, index) => {
-                    return item;
-                });
-                    tempStore[actualPage]=contact;
+                console.dir(contact);
+                console.log(contact.full_name);
+                contact.full_name === "" ? tempStore.contacts[actualPage].full_name = tempStore.contacts[actualPage].full_name : tempStore.contacts[actualPage].full_name = contact.full_name;
+                contact.e_mail === "" ? tempStore.contacts[actualPage].e_mail = tempStore.contacts[actualPage].e_mail : tempStore.contacts[actualPage].e_mail = contact.e_mail;
+                contact.address === "" ? tempStore.contacts[actualPage].address = tempStore.contacts[actualPage].address : tempStore.contacts[actualPage].address = contact.address;
+                contact.phone === "" ? tempStore.contacts[actualPage].phone = tempStore.contacts[actualPage].phone : tempStore.contacts[actualPage].phone = contact.phone;
                                 
-                setStore({ contacts: tempStore });
+                setStore({ tempStore });
 
             },
 			deleteItem: id => {
