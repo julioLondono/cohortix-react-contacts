@@ -40,8 +40,7 @@ const getState = ({ getStore, setStore }) => {
             },
             updateContact : (contact, actualPage) => {
                 const tempStore = getStore();
-                console.dir(contact);
-                console.log(contact.full_name);
+                
                 contact.full_name === "" ? tempStore.contacts[actualPage].full_name = tempStore.contacts[actualPage].full_name : tempStore.contacts[actualPage].full_name = contact.full_name;
                 contact.e_mail === "" ? tempStore.contacts[actualPage].e_mail = tempStore.contacts[actualPage].e_mail : tempStore.contacts[actualPage].e_mail = contact.e_mail;
                 contact.address === "" ? tempStore.contacts[actualPage].address = tempStore.contacts[actualPage].address : tempStore.contacts[actualPage].address = contact.address;
@@ -60,7 +59,18 @@ const getState = ({ getStore, setStore }) => {
 				mappedArray.splice(id, 1);
 
 				setStore({ contacts: mappedArray });
-			}
+            },
+            fetchAll: () => {
+            fetch('https://assets.breatheco.de/apis/fake/contact/agenda/alejo')
+            .then(function(response) {
+              return response.json();
+            })
+            .then(function(myJson) {
+              console.log(myJson);
+              const store = getStore();
+              setStore ({contacts: myJson });
+            });
+            }
 		}
 	};
 };
