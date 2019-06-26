@@ -9,17 +9,7 @@ export default class Contacts extends React.Component {
 		super();
 		this.state = {
 			showModal: false, 
-			contacts: [
-                {
-                    full_name: "Julio",
-                    e_mail: "julio@getMaxListeners.com",
-                    address: "2334rtyu hjj",
-                    phone: " 3456789",
-                    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_Um3jwtoAXI0J_vraw8ezD3xdjhEQMJY04cprRuUCJ3_LomR9"
-
-                }
-
-            ]   
+			contacts: []   
 		};
 	}
 
@@ -41,10 +31,10 @@ export default class Contacts extends React.Component {
 												full_name={elem.full_name}
 												address={elem.address}
 												phone={elem.phone}
-												e_mail={elem.e_mail}
+												email={elem.email}
 												image={elem.image}
 												key={index}
-												theId={index}
+												theId={elem.id}
 											/>
 										);
 									});
