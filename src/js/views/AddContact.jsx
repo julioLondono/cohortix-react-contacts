@@ -17,25 +17,28 @@ export default class AddContact extends React.Component {
     }
 	render() {
         let actualPage = this.props.match.params.theId;
-        let pageString= actualPage.toString();
-        console.log("actualPage= " + pageString);
+        console.log("actualPage= " + actualPage);
+        let pageId= null;
+        
+        actualPage > 0 ? pageId= actualPage.toString(): 0;
+        console.log("actualPageId= " + pageId);
 		return (
 			<div className="container">
                 <Context.Consumer>
                     {({store, actions}) => {
-                        var selectedContact = store.contacts.filter((actualId) => {
-                            let realPos = actualId.id;
-                            let realPosString = realPos.toString();
-                            return realPosString === pageString;
+                
+                        var selectedContact = store.contacts.filter((item) => {
+                            return item.id === pageId;
                         });
-                        console.dir("SelectedContactId= "+selectedContact);
+                        // console.log("SelectedContactId= "+ selectedContact[0].full_name);
+
                         return (
                             <div>
-                                <h1 className="text-center mt-5"> {actualPage >= 0 ? "Edit Contact" :"Add a new contact " }</h1>
+                                <h1 className="text-center mt-5"> {actualPage > 0 ? "Edit Contact" :"Add a new contact " }</h1>
                                 <form>
                                     <div className="form-group">
                                         <label>Full Name</label>
-                                        <input type="text" className="form-control nombre" placeholder= {actualPage >= 0 ? selectedContact[0].full_name : "Full Name" } 
+                                        <input type="text" className="form-control nombre" placeholder= {actualPage > 0 ? selectedContact[0].full_name : "Full Name" } 
                                         value={this.state.name}
                                         onChange={event => {
                                             this.setState ({
@@ -47,7 +50,7 @@ export default class AddContact extends React.Component {
                                     </div>
                                     <div className="form-group">
                                         <label>Email</label>
-                                        <input type="email" className="form-control correo" placeholder= {actualPage >= 0 ? selectedContact[1].email : "Enter email" } 
+                                        <input type="email" className="form-control correo" placeholder= {actualPage > 0 ? selectedContact[0].email : "Enter email" } 
                                         value={this.state.email}
                                         onChange={event => {
                                             this.setState ({
@@ -58,7 +61,7 @@ export default class AddContact extends React.Component {
                                     </div>
                                     <div className="form-group">
                                         <label>Phone</label>
-                                        <input type="text" className="form-control telefono" placeholder= {actualPage >= 0 ? selectedContact[4].phone : "Enter phone" }
+                                        <input type="text" className="form-control telefono" placeholder= {actualPage > 0 ? selectedContact[0].phone : "Enter phone" }
                                         value={this.state.phone}
                                         onChange={event => {
                                             this.setState ({
@@ -68,7 +71,7 @@ export default class AddContact extends React.Component {
                                     </div>
                                     <div className="form-group">
                                         <label>Address</label>
-                                        <input type="text" className="form-control direccion" placeholder= {actualPage >= 0 ? selectedContact[3].address : "Enter address" }  
+                                        <input type="text" className="form-control direccion" placeholder= {actualPage > 0 ? selectedContact[0].address : "Enter address" }  
                                         value={this.state.address}
                                         onChange={event => {
                                             this.setState ({
