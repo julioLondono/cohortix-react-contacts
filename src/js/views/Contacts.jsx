@@ -27,7 +27,7 @@ export default class Contacts extends React.Component {
 									return store.contacts.map((elem, index) => {
 										return (
 											<ContactCard 
-												onDelete={() => actions.deleteItem(index)} 
+												onDelete={() => actions.deleteItem(elem, elem.id)} 
 												full_name={elem.full_name}
 												address={elem.address}
 												phone={elem.phone}

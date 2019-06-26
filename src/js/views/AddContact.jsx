@@ -60,16 +60,6 @@ export default class AddContact extends React.Component {
                                         />
                                     </div>
                                     <div className="form-group">
-                                        <label>Phone</label>
-                                        <input type="text" className="form-control telefono" placeholder= {actualPage > 0 ? selectedContact[0].phone : "Enter phone" }
-                                        value={this.state.phone}
-                                        onChange={event => {
-                                            this.setState ({
-                                                phone: event.target.value
-                                            });
-                                        }} />
-                                    </div>
-                                    <div className="form-group">
                                         <label>Address</label>
                                         <input type="text" className="form-control direccion" placeholder= {actualPage > 0 ? selectedContact[0].address : "Enter address" }  
                                         value={this.state.address}
@@ -79,6 +69,17 @@ export default class AddContact extends React.Component {
                                             });
                                         }}/>
                                     </div>
+                                    <div className="form-group">
+                                        <label>Phone</label>
+                                        <input type="text" className="form-control telefono" placeholder= {actualPage > 0 ? selectedContact[0].phone : "Enter phone" }
+                                        value={this.state.phone}
+                                        onChange={event => {
+                                            this.setState ({
+                                                phone: event.target.value
+                                            });
+                                        }} />
+                                    </div>
+                                    
                                     
                                     <div>
                                     { actualPage >= 0 ?    
@@ -107,7 +108,7 @@ export default class AddContact extends React.Component {
                                                         phone: this.state.phone,
                                                         address: this.state.address
                                                         };
-                                                        actions.addContact(contact);
+                                                actions.addContact(contact);
                                                     }
                                             }
                                             >Add New Contact
