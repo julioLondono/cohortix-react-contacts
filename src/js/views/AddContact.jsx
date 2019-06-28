@@ -94,7 +94,7 @@ export default class AddContact extends React.Component {
                                                         };
                                                         // console.log("action theID= " + actualPage);
                                                         // console.log("contact.full_name= " + contact.full_name);
-                                                actions.updateContact(contact, actualPage);
+                                                actions.updateContact(contact, pageId);
                                             }
                                             }
                                             >Update Contact

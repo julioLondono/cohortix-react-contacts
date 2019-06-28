@@ -19,7 +19,7 @@ const getState = ({ getStore, setStore }) => {
                   }).then(res => res.json())
                   .then(response => {
                     var tempStore = getStore();
-                    tempStore.contacts.push(item);
+                    tempStore.contacts.push(response);
                     setStore({tempStore}); 
                     console.log('Success:', JSON.stringify(response));
                 })
@@ -27,23 +27,34 @@ const getState = ({ getStore, setStore }) => {
             },
 
       updateContact : (contact, actualPage) => {
-        fetch('https://assets.breatheco.de/apis/fake/contact/', {
-                    method: 'POST', // or 'POST'
+        fetch('https://assets.breatheco.de/apis/fake/contact/' + actualPage, {
+                    method: 'PUT', // or 'POST'
                     body: JSON.stringify(contact), // data can be `string` or {object}!
                     headers:{
                       'Content-Type': 'application/json'
                     }
-                  }).then(res => res.json())
+                  })
+                  .then(res => res.json())
                   .then(response => {
-                    var tempStore = getStore();
+                    console.dir("response="+response.id);
+                    if( response.id === actualPage) {
                     
-                    contact.full_name === "" ? tempStore.contacts[actualPage].full_name = tempStore.contacts[actualPage].full_name : tempStore.contacts[actualPage].full_name = contact.full_name;
-                    contact.email === "" ? tempStore.contacts[actualPage].email = tempStore.contacts[actualPage].email : tempStore.contacts[actualPage].e_mail = contact.email;
-                    contact.address === "" ? tempStore.contacts[actualPage].address = tempStore.contacts[actualPage].address : tempStore.contacts[actualPage].address = contact.address;
-                    contact.phone === "" ? tempStore.contacts[actualPage].phone = tempStore.contacts[actualPage].phone : tempStore.contacts[actualPage].phone = contact.phone;
+                        var tempStore = getStore();
+                        let mappedStore = tempStore.contacts.map( (item, index) =>{ 
+                          return item;
+                        });
+                        
+                        // let checkPosition = (pos) => {pos=mappedStore.id;};
+                        let position = mappedStore.findIndex(obj => obj.id === actualPage);
+                        console.log("Position= " + position);
+                        
+                        mappedStore[position].full_name= response.full_name;
+                        mappedStore[position].email= response.email;
+                        mappedStore[position].phone= response.phone;
+                        mappedStore[position].address= response.address;
 
-                    setStore({tempStore}); 
-                    console.log('Success:', JSON.stringify(response));
+                        setStore({contacts:mappedStore});  
+                      }     
                 })
                   .catch(error => console.error('Error:', error));
         },
